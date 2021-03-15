@@ -13,9 +13,8 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
     margin: theme.spacing(2, 8),
-  }
+  },
 }));
-
 
 
 const Form = props => {
@@ -24,38 +23,40 @@ const Form = props => {
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
-      <Box pb={4}>
-        <TextField
-          label="Full Name"
-          variant={'outlined'}
-          fullWidth
-          className={classes.textField}
-        />
-        <TextField
-          label="E-Mail"
-          variant={'outlined'}
-          fullWidth
-          className={classes.textField}
-        />
-        <TextField
-          label="Message"
-          variant={'outlined'}
-          fullWidth
-          multiline
-          rows={4}
-          className={classes.textField}
-        />
-      </Box>
-      <Box ml={8}>
-        <Button
-          variant={'outlined'}
-          size={'large'}
-          color={'primary'}
-          href={'/contact'}
-        >
-          Send Message
-        </Button>
-      </Box>
+      <form name="contact" netlify>
+        <Box pb={4}>
+          <TextField
+            label="Full Name"
+            variant={'outlined'}
+            fullWidth
+            className={classes.textField}
+          />
+          <TextField
+            label="E-Mail"
+            variant={'outlined'}
+            fullWidth
+            className={classes.textField}
+          />
+          <TextField
+            label="Message"
+            variant={'outlined'}
+            fullWidth
+            multiline
+            rows={4}
+            className={classes.textField}
+          />
+        </Box>
+        <Box ml={8}>
+          <Button
+            variant={'outlined'}
+            size={'large'}
+            color={'primary'}
+            href={'/contact'}
+          >
+            Send Message
+          </Button>
+        </Box>
+      </form>
     </div>
   );
 };
