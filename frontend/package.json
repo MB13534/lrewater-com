@@ -50,7 +50,6 @@
     "start": "^5.1.0",
     "string-strip-html": "^7.0.3",
     "swiper": "^5.4.1",
-    "thefront-assets": "git+https://github.com/gevorgmakaryan/thefront-assets.git#1.0.7",
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
