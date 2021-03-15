@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;
+}
+
+body {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+#root {
+  height: 100%;
+}
+
+.text-highlighted {
+  color: #B7BF10;
+
+  &__primary {
+    color: #0092BC;
+  }
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
