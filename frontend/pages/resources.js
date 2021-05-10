@@ -4,7 +4,7 @@ import Main from 'layouts/Main';
 const ResourcesPage = ({ data }) => {
   return (
     <div className="container">
-      <Main>
+      <Main siteSettings={data.siteSettings}>
         <Resources data={data} />
       </Main>
     </div>
@@ -22,6 +22,10 @@ export async function getStaticProps() {
   json = await res.json();
   let resourceTypes = json.data;
 
+  res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/site_settings?fields=*.*.*&single=1`);
+  json = await res.json();
+  let siteSettings = json.data;
+
   let pageData = {};
 
   return {
@@ -30,6 +34,7 @@ export async function getStaticProps() {
         resources,
         resourceTypes,
         pageData,
+        siteSettings,
       },
     },
   };

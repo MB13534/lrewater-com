@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { SectionHeader } from '../../../../components/molecules';
@@ -50,6 +50,12 @@ const ServiceGroups = props => {
     setExpanded(expanded === panel ? false : panel);
   };
 
+  useEffect(() => {
+    if (window.location.hash) {
+      setExpanded(`service${window.location.hash.slice(1)}`);
+    }
+  }, [])
+
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <SectionHeader
@@ -76,6 +82,12 @@ const ServiceGroups = props => {
               </Box>
             </Grid>
             <Grid item xs={12} md={9}>
+              <a name={`${serviceGroup.id}`} style={{
+                display: 'block',
+                position: 'relative',
+                top: '-140px',
+                visibility: 'hidden',
+              }}/>
               <Typography
                 variant="h3"
                 className={classes.serviceGroupName}
@@ -88,13 +100,19 @@ const ServiceGroups = props => {
               </Typography>
 
               {serviceGroup.services.map((service, j) => {
-                const isExpanded = expanded === `service${i}_${j}`;
+                const isExpanded = expanded === `service${serviceGroup.id}_${service.id}`;
                 return (
                   <div key={j} className={clsx({[classes.expanded]: isExpanded})}>
+                    <a name={`${serviceGroup.id}_${service.id}`} style={{
+                      display: 'block',
+                      position: 'relative',
+                      top: '-130px',
+                      visibility: 'hidden',
+                    }}/>
                     <Typography
                       variant="h4"
                       className={classes.serviceName}
-                      onClick={() => handleChange(`service${i}_${j}`)}
+                      onClick={() => handleChange(`service${serviceGroup.id}_${service.id}`)}
                     >
                     <div
                       className={classes.toggleButton}

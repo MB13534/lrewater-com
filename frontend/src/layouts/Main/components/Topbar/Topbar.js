@@ -24,6 +24,9 @@ const useStyles = makeStyles(theme => ({
     boxShadow: 'none',
     background: theme.palette.white,
     borderBottom: `1px solid ${colors.grey[200]}`,
+    position: 'fixed',
+    top: 0,
+    zIndex: '1299',
   },
   flexGrow: {
     flexGrow: 1,
@@ -74,7 +77,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(4),
     border: theme.spacing(2),
     boxShadow: '0 0.5rem 2rem 2px rgba(116, 123, 144, 0.09)',
-    minWidth: 350,
+    minWidth: 160,
     marginTop: theme.spacing(2),
   },
   iconButton: {
@@ -88,11 +91,12 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.dark,
   },
   logoContainer: {
-    width: 550 / 5,
-    height: 240 / 5,
+    width: '125px',
+    height: 'auto',
+    marginTop: '10px',
     [theme.breakpoints.up('md')]: {
-      width: 550 / 4,
-      height: 240 / 4,
+      width: '155px',
+      height: 'auto',
     },
   },
   logoImage: {

@@ -18,7 +18,7 @@ const Quote = props => {
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <Typography
-        variant={'h1'}
+        variant={'h2'}
         align={'center'}
         style={{fontWeight:300, textTransform: 'uppercase', width: '80%', margin: '0 auto'}}
       >

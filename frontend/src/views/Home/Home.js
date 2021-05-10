@@ -1,12 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Section, SectionAlternate } from 'components/organisms';
-import { Hero, Services, CTA } from './components';
+import { Services, CTA } from './components';
+import VideoHero from './components/VideoHero';
 
 const useStyles = makeStyles(theme => ({
   root: {},
   heroWrap: {
     backgroundColor: theme.palette.brand.dark,
+    overflow: 'hidden',
+    position: 'relative',
   },
 }));
 
@@ -17,7 +20,7 @@ const Home = ({ data }) => {
     <div className={classes.root}>
       <div className={classes.heroWrap}>
         <Section disablePadding>
-          <Hero data={data.pageData.hero_banner} />
+          <VideoHero data={data.pageData.hero_banner} />
         </Section>
       </div>
       <Section>

@@ -39,21 +39,33 @@ const WhoWeAre = ({ data }) => {
 
   return (
     <div className={classes.root}>
-      <SectionAlternate className={classes.sectionBreadcrumb}>
+      {/*<SectionAlternate className={classes.sectionBreadcrumb}>
         <Breadcrumb data={breadcrumb} />
-      </SectionAlternate>
+      </SectionAlternate>*/}
       <Section disablePadding style={{display: 'inline'}}>
         <PageHero data={data.pageData} className={classes.pageHero} />
+        <a name="our-mission" style={{
+          display: 'block',
+          position: 'relative',
+          top: '-100px',
+          visibility: 'hidden',
+        }}/>
       </Section>
       <Section>
         <Mission data={data} />
+        <a name="our-values"/>
       </Section>
+
       <SectionAlternate>
         <Values data={data} />
+        <a name="our-people"/>
       </SectionAlternate>
+
       <Section>
         <People data={data} />
+        <a name="our-locations"/>
       </Section>
+
       <SectionAlternate dark>
         <Locations data={data} />
       </SectionAlternate>

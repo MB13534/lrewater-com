@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Main = props => {
-  const { children } = props;
+  let { siteSettings, children } = props;
 
   const classes = useStyles();
 
@@ -27,15 +27,31 @@ const Main = props => {
       id: 'home',
       href: '/',
     },
-    resources: {
-      title: 'Resources',
-      id: 'resources',
-      href: '/resources',
-    },
     whoweare: {
       title: 'Who We Are',
       id: 'whoweare',
-      href: '/who-we-are',
+      children: [
+        {
+          title: 'Our Mission',
+          id: 'our-mission',
+          href: '/who-we-are#our-mission',
+        },
+        {
+          title: 'Our Values',
+          id: 'our-values',
+          href: '/who-we-are#our-values',
+        },
+        {
+          title: 'Our People',
+          id: 'our-people',
+          href: '/who-we-are#our-people',
+        },
+        {
+          title: 'Our Locations',
+          id: 'our-locations',
+          href: '/who-we-are#our-locations',
+        },
+      ],
     },
     whatwedo: {
       title: 'What We Do',
@@ -52,6 +68,11 @@ const Main = props => {
           href: '/projects',
         },
       ],
+    },
+    resources: {
+      title: 'Resources',
+      id: 'resources',
+      href: '/resources',
     },
     careers: {
       title: 'Careers',
@@ -96,6 +117,15 @@ const Main = props => {
 
   const open = isMd ? false : openSidebar;
 
+  if (!siteSettings) {
+    siteSettings = {
+      youtube_url: '',
+      twitter_url: '',
+      linkedin_url: '',
+      tagline: 'Connecting Water to Life',
+      legal: '© 2015-2021. Leonard Rice Engineers, Inc.'
+    }
+  }
   return (
     <div
       className={clsx({
@@ -109,8 +139,8 @@ const Main = props => {
         variant="temporary"
         pages={pages}
       />
-      <main>{children}</main>
-      <Footer pages={pages} />
+      <main style={{marginTop:'120px'}}>{children}</main>
+      <Footer siteSettings={siteSettings} pages={pages} />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import Breadcrumb from '../../common/Breadcrumb';
 import Body from './components/Body';
 import PageHero from '../../common/PageHero';
 import Videos from './components/Videos';
+import Gallery from './components/Gallery';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -52,6 +53,9 @@ const Culture = ({ data }) => {
         <Body data={data} />
       </Section>
       <Section style={{paddingTop: 0}}>
+        <Gallery data={data} />
+      </Section>
+      <Section>
         <Videos data={data} />
       </Section>
       {/*<SectionAlternate>

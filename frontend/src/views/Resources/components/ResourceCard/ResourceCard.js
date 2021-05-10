@@ -66,7 +66,8 @@ const ResourceCard = props => {
   const classes = useStyles();
   const theme = useTheme();
 
-  let image = resource.image.data.thumbnails.find(x => x.key === 'resource-thumb');
+  let image = resource.image?.data.thumbnails.find(x => x.key === 'resource-thumb');
+  if (!image) image = { url: '#'};
 
   return (
     <div className={clsx(classes.root, className, size === 'small' ? classes.smallMode : '')} {...rest}>

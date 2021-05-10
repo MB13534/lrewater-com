@@ -7,6 +7,7 @@ import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Image from '../../../../components/atoms/Image';
 import Hidden from '@material-ui/core/Hidden';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       width: 'calc(100% - 20px)',
       margin: '10px',
+      padding: theme.spacing(3),
     },
     '&:focus, & *:focus': {
       outline: 'none',
@@ -66,8 +68,19 @@ const useStyles = makeStyles((theme) => ({
     '& span': {
       color: theme.palette.primary.main,
     },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '12px',
+    }
   },
   phone: {
+    color: 'white',
+    textTransform: 'uppercase',
+    marginTop: theme.spacing(2),
+    '& span': {
+      color: theme.palette.primary.main,
+    },
+  },
+  social: {
     color: 'white',
     textTransform: 'uppercase',
     marginTop: theme.spacing(2),
@@ -80,6 +93,10 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     lineHeight: 1.9,
     marginRight: theme.spacing(8),
+    [theme.breakpoints.down('sm')]: {
+      marginRight: 0,
+      fontSize: '14px',
+    }
   },
   iconButton: {
     position: 'absolute',
@@ -93,6 +110,10 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: 'white',
   },
+  socialIcon: {
+    padding: 0,
+    marginTop: theme.spacing(2),
+  }
 }));
 
 export default function PeopleModal(props) {
@@ -155,6 +176,11 @@ export default function PeopleModal(props) {
           >
             Call <span>{person.phone}</span>
           </Typography>
+          }
+          {person.linkedin_url &&
+          <IconButton className={classes.socialIcon} href={person.linkedin_url} target={"_blank"}>
+            <LinkedInIcon className={classes.icon} />
+          </IconButton>
           }
         </Grid>
       </Grid>

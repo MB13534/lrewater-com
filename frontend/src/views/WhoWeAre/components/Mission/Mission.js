@@ -33,9 +33,11 @@ const Mission = props => {
           },
         }}
       />
-      <Box mb={4}>
-        <Image src={data.pageData.mission_image.data.full_url} width={'100%'} height="auto" alt={data.pageData.mission_image.title} />
-      </Box>
+      {data.pageData.mission_image && (
+        <Box mb={4}>
+          <Image src={data.pageData.mission_image.data.full_url} width={'100%'} height="auto" alt={data.pageData.mission_image.title} />
+        </Box>
+      )}
       <Grid container spacing={8}>
         <Grid item xs={12}>
           <Typography

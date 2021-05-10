@@ -125,7 +125,7 @@ export default function App({ Component, pageProps }) {
         <meta name="theme-color" content="#ffffff" />
         <meta
           name="description"
-          content="A modern design system for LRE Water web sites."
+          content="LRE is a recognized leader in water resources throughout the western United States. Divisions in Colorado, Arizona, Texas, Nebraska & Arizona."
         />
         <meta
           name="robots"
@@ -135,17 +135,17 @@ export default function App({ Component, pageProps }) {
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content="http://localhost:3000/social.png"
+          content="https://lrewater.com/social.png"
         />
         <meta
           property="og:title"
-          content="LRE Water | CMS Starter Kit"
+          content="Leonard Rice Engineers, Inc - Water Consultation Services"
         />
         <meta
           property="og:description"
-          content="A modern design system for LRE Water web sites."
+          content="LRE is a recognized leader in water resources throughout the western United States. Divisions in Colorado, Arizona, Texas, Nebraska & Arizona."
         />
-        <meta property="og:url" content="http://localhost:3000/" />
+        <meta property="og:url" content="https://lrewater.com/" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&display=swap"
@@ -160,12 +160,16 @@ export default function App({ Component, pageProps }) {
           rel="stylesheet"
         />
         <title>
-          LRE Water | CMS Starter Kit
+          Leonard Rice Engineers, Inc - Water Consultation Services
         </title>
         <script
           src="https://kit.fontawesome.com/4c273e6d43.js"
           crossOrigin="anonymous"
         ></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
       </Head>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

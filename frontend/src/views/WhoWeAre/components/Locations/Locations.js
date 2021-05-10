@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { SectionHeader } from '../../../../components/molecules';
 import useTheme from '@material-ui/core/styles/useTheme';
 import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
+import { darken, Typography } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 const MapboxGLMap = dynamic(() => import('../../../../common/MapboxGLMap'), {
   loading: () => "Loading...",
@@ -23,10 +23,15 @@ const useStyles = makeStyles(theme => ({
   },
   phone: {
     marginBottom: theme.spacing(2),
+    color: darken('#ffffff', 0.4),
     fontSize: '18px'
   },
   address: {
-    fontSize: '18px'
+    color: darken('#ffffff', 0.2),
+    fontSize: '18px',
+    '&:hover': {
+      color: theme.palette.primary.main,
+    }
   }
 }));
 
@@ -57,7 +62,15 @@ const Locations = props => {
             <Typography variant="h6" className={classes.name}>
               {location.name}
             </Typography>
-            <div className={classes.address}>{location.address}</div>
+            <Typography
+              variant="body1"
+              className={classes.address}
+              component={'a'}
+              target="_blank"
+              href={`https://www.google.com/maps/dir//${location.address}`}
+            >
+              {location.address}
+            </Typography>
             <div className={classes.phone}>{location.phone}</div>
           </Grid>
         ))}

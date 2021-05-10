@@ -70,7 +70,7 @@ const Videos = props => {
         </Grid>
         <Grid item xs={12}>
           {data.pageData.annual_videos.map((video, i) =>
-            <div onClick={() => gotoYear(i)} className={clsx(classes.year, i === lastIndex ? classes.yearActive : '')}>
+            <div key={i} onClick={() => gotoYear(i)} className={clsx(classes.year, i === lastIndex ? classes.yearActive : '')}>
               {video.year}
             </div>
           )}

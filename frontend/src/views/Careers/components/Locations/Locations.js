@@ -8,6 +8,7 @@ import { Typography } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import Image from '../../../../components/atoms/Image';
 import Link from '@material-ui/core/Link';
+import Hidden from '@material-ui/core/Hidden';
 const MapboxGLMap = dynamic(() => import('../../../../common/MapboxGLMap'), {
   loading: () => "Loading...",
   ssr: false,
@@ -27,6 +28,22 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2),
   },
   cardTitle: {
+    position: 'absolute',
+    left: 0,
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: '100%',
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    color: 'white',
+    padding: theme.spacing(2),
+    '& p': {
+      fontSize: '16px',
+      fontWeight: 'normal',
+      textTransform: 'none',
+    }
+  },
+  placeholderTitle: {
     position: 'absolute',
     left: 0,
     top: '50%',
@@ -77,27 +94,66 @@ const Locations = props => {
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <Grid container spacing={0}>
-        {data.locations.map((location, i) => (
-          <Grid item xs={12} md={i > 2 && i < 5 ? 6 : 4}>
-            <Link href={`/careers/${location.id}`} className={classes.cardImage}>
-              {location.image && (
-              <Image
-                src={location.image.data.thumbnails.find(x => x.key === 'directus-medium-crop').url}
-                width={'100%'}
-                height="auto"
-                alt={location.title}
-              />
-              )}
-              <Typography
-                variant="h6"
-                className={classes.cardTitle}
-              >
-                {location.name}
-                <p>{location.positions.length} Positions</p>
-              </Typography>
-            </Link>
-          </Grid>
-        ))}
+        {data.locations.map((location, index) => {
+          if (index === 4) {
+            return (
+              <>
+                <Hidden smDown>
+                  <Grid item xs={12} md={4} style={{position: 'relative'}}>
+                      <Typography
+                        variant="h6"
+                        className={classes.placeholderTitle}
+                      >
+                        More Locations Coming Soon
+                      </Typography>
+                  </Grid>
+                </Hidden>
+                <Grid item xs={12} md={4}>
+                  <Link href={`/careers/${location.id}`} className={classes.cardImage}>
+                    {location.image && (
+                      <Image
+                        src={location.image.data.thumbnails.find(x => x.key === 'directus-medium-crop').url}
+                        width={'100%'}
+                        height="auto"
+                        alt={location.title}
+                      />
+                    )}
+                    <Typography
+                      variant="h6"
+                      className={classes.cardTitle}
+                    >
+                      {location.name}
+                      <p>{location.positions.length} Positions</p>
+                    </Typography>
+                  </Link>
+                </Grid>
+              </>
+            );
+          } else {
+            return (
+              <Grid item xs={12} md={4}>
+                <Link href={`/careers/${location.id}`} className={classes.cardImage}>
+                  {location.image && (
+                    <Image
+                      src={location.image.data.thumbnails.find(x => x.key === 'directus-medium-crop').url}
+                      width={'100%'}
+                      height="auto"
+                      alt={location.title}
+                    />
+                  )}
+                  <Typography
+                    variant="h6"
+                    className={classes.cardTitle}
+                  >
+                    {location.name}
+                    <p>{location.positions.length} Positions</p>
+                  </Typography>
+                </Link>
+              </Grid>
+            )
+          }
+        }
+        )}
       </Grid>
     </div>
   );

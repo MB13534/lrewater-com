@@ -9,12 +9,12 @@ import {
   List,
   ListItem,
 } from '@material-ui/core';
-import FacebookIcon from '@material-ui/icons/Facebook';
+import YouTubeIcon from '@material-ui/icons/YouTube';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import PinterestIcon from '@material-ui/icons/Pinterest';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 import { Image } from 'components/atoms';
+import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,8 +25,11 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.background.footer,
     backgroundImage: 'url(/images/footer-bg.png)',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'bottom right',
-    backgroundSize: '50%'
+    backgroundPosition: 'top right',
+    backgroundSize: 'contain',
+    [theme.breakpoints.down('sm')]: {
+      backgroundImage: 'none !important',
+    }
   },
   footerContainer: {
     maxWidth: 1100,
@@ -97,6 +100,7 @@ const useStyles = makeStyles(theme => ({
     color: 'white',
     textTransform: 'uppercase',
     marginLeft: -40,
+    textShadow: '3px 3px 0px rgba(0,0,0,0.2)',
   },
   legal: {
     color: 'white',
@@ -105,15 +109,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Footer = props => {
-  const { pages, className, ...rest } = props;
+  const { siteSettings, pages, className, ...rest } = props;
 
   const classes = useStyles();
 
+  let footerImage = '';
+
+  if (siteSettings.footer_image) {
+    footerImage = siteSettings.footer_image.data.thumbnails.find(x => x.key === 'directus-large-crop').url;
+  }
+
   return (
-    <div {...rest} className={clsx(classes.root, className)}>
+    <div {...rest} className={clsx(classes.root, className)} style={{backgroundImage: `url(${footerImage})`}}>
       <div className={classes.footerContainer}>
         <Grid container spacing={4}>
-          <Grid item xs={12} md={2}>
+          <Grid item xs={6} md={2}>
             <List disablePadding>
               <ListItem disableGutters className={classes.logoContainerItem}>
                 <div className={classes.logoContainer}>
@@ -128,22 +138,19 @@ const Footer = props => {
                 </div>
               </ListItem>
               <ListItem disableGutters>
-                <IconButton className={classes.socialIcon}>
-                  <FacebookIcon className={classes.icon} />
+                <IconButton className={classes.socialIcon} href={siteSettings.youtube_url} target={'_blank'}>
+                  <YouTubeIcon className={classes.icon} />
                 </IconButton>
-                <IconButton className={classes.socialIcon}>
-                  <InstagramIcon className={classes.icon} />
-                </IconButton>
-                <IconButton className={classes.socialIcon}>
+                <IconButton className={classes.socialIcon} href={siteSettings.twitter_url} target={'_blank'}>
                   <TwitterIcon className={classes.icon} />
                 </IconButton>
-                <IconButton className={classes.socialIcon}>
-                  <PinterestIcon className={classes.icon} />
+                <IconButton className={classes.socialIcon} href={siteSettings.linkedin_url} target={'_blank'}>
+                  <LinkedInIcon className={classes.icon} />
                 </IconButton>
               </ListItem>
             </List>
           </Grid>
-          <Grid item xs={12} md={4} className={classes.menuListContainer}>
+          <Grid item xs={6} md={4} className={classes.menuListContainer}>
             <Grid container spacing={0}>
               <Grid item className={classes.listItem}>
                 <div className={classes.menu}>
@@ -188,19 +195,33 @@ const Footer = props => {
                 </div>
               </Grid>
             </Grid>
+            <Hidden smDown>
             <Typography
               variant={'caption'}
               className={classes.legal}
             >
-              &copy; 2015-{new Date().getFullYear()}. Leonard Rice Engineers, Inc.
+              {siteSettings.legal}
             </Typography>
+            </Hidden>
           </Grid>
+          <Hidden mdUp>
+            <Grid item xs={12} style={{textAlign: 'center'}}>
+              <Typography
+                variant={'caption'}
+                className={classes.legal}
+              >
+                {siteSettings.legal}
+              </Typography>
+            </Grid>
+          </Hidden>
+          <Hidden smDown>
           <Grid item xs={12} md={6}>
             <Typography
               variant={'h1'}
               className={classes.slogan}
-              >Connecting Water to Life</Typography>
+              >{siteSettings.tagline}</Typography>
           </Grid>
+          </Hidden>
         </Grid>
       </div>
     </div>

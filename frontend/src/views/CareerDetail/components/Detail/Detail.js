@@ -81,6 +81,12 @@ const Detail = props => {
     setExpanded(expanded === panel ? false : panel);
   };
 
+  if (positions.length === 0) {
+    return (
+      <div style={{textAlign: 'center'}}>Sorry, there are no positions available at this location at this time.</div>
+    );
+  }
+
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       {positions.map((position, i) => {

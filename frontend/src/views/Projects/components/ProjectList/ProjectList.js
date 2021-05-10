@@ -136,7 +136,7 @@ const ProjectList = props => {
       }
 
       if (sort === 'chronological') {
-        newState = newState.sort((a,b)=> (a.created_on > b.created_on ? 1 : -1));
+        newState = newState.sort((a,b)=> (a.project_date > b.project_date ? 1 : -1));
       }
 
       return newState;

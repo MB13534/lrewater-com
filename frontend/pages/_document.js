@@ -125,6 +125,7 @@ export default class MyDocument extends Document {
             src="https://kit.fontawesome.com/4c273e6d43.js"
             crossOrigin="anonymous"
           ></script>
+
         </Head>
         <body>
         <Main />

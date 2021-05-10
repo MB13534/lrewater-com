@@ -5,7 +5,7 @@ import React from 'react';
 const ProjectsPage = ({ data }) => {
   return (
     <div className="container">
-      <Main>
+      <Main siteSettings={data.siteSettings}>
         <Projects data={data} />
       </Main>
     </div>
@@ -43,6 +43,10 @@ export async function getStaticProps() {
   json = await res.json();
   let pageData = json.data;
 
+  res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/site_settings?fields=*.*.*&single=1`);
+  json = await res.json();
+  let siteSettings = json.data;
+
   return {
     props: {
       data: {
@@ -53,6 +57,7 @@ export async function getStaticProps() {
         projects,
         expertises,
         pageData,
+        siteSettings,
       },
     },
   };

@@ -34,9 +34,9 @@ const Services = ({ data }) => {
 
   return (
     <div className={classes.root}>
-      <SectionAlternate className={classes.sectionBreadcrumb}>
+      {/*<SectionAlternate className={classes.sectionBreadcrumb}>
         <Breadcrumb data={breadcrumb} />
-      </SectionAlternate>
+      </SectionAlternate>*/}
       <Section disablePadding fullWidth>
         <PageHero data={data.pageData} />
       </Section>

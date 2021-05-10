@@ -12,6 +12,11 @@ const useStyles = makeStyles(theme => ({
   header: {
     alignSelf: 'center',
     textAlign: 'center',
+    [theme.breakpoints.down('sm')]: {
+      '& .section-header__title': {
+        fontSize: '1.2rem !important',
+      }
+    }
   },
 }));
 
@@ -35,7 +40,7 @@ const CTA = props => {
             color: '#53565A',
             fontWeight: '300',
             textTransform: 'uppercase',
-            width: '50%',
+            width: '80%',
             fontSize: '1.5rem',
             display: 'inline-block',
             lineHeight: '1.7'

@@ -55,7 +55,8 @@ const Detail = props => {
   const { resource, className, ...rest } = props;
   const classes = useStyles();
 
-  let image = resource.image.data.thumbnails.find(x => x.key === 'directus-large-contain');
+  let image = resource.image?.data.thumbnails.find(x => x.key === 'directus-large-contain');
+  if (!image) image = { url: '#'};
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>

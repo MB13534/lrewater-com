@@ -13,7 +13,17 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
     margin: theme.spacing(2, 8),
+    [theme.breakpoints.down('sm')]: {
+      margin: theme.spacing(1, 2),
+    }
   },
+  form: {
+    width: '100%',
+    paddingRight: theme.spacing(14),
+    [theme.breakpoints.down('sm')]: {
+      paddingRight: theme.spacing(4),
+    },
+  }
 }));
 
 
@@ -23,7 +33,7 @@ const Form = props => {
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
-      <form name="contact" netlify>
+      <form name="contact" netlify="true" className={classes.form}>
         <Box pb={4}>
           <TextField
             label="Full Name"

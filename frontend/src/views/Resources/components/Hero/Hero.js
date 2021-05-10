@@ -13,7 +13,7 @@ import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(12, 0),
+    padding: theme.spacing(12, 4),
     position: 'relative',
 
   },
@@ -33,19 +33,28 @@ const Hero = props => {
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
-      <Grid container spacing={0}>
+      <Grid container spacing={6}>
         <Grid item xs={12} md={6}>
           <Typography variant="h1">RESOURCES</Typography>
-          <Box mt={12}>
-            {data.resourceTypes.map(resourceType => (
-              <div key={resourceType.name}><Link href={'#'} color={'textSecondary'} className={classes.linkListItem}>{resourceType.name}</Link></div>
-            ))}
-          </Box>
+          <Hidden smDown>
+            <Box mt={12} pr={26}>
+              {/*{data.resourceTypes.map(resourceType => (*/}
+              {/*  <div key={resourceType.name}><Link href={'#'} color={'textSecondary'} className={classes.linkListItem}>{resourceType.name}</Link></div>*/}
+              {/*))}*/}
+
+              <Typography
+                variant={'body2'}
+                >
+                Browse our articles and check out the latest water resources and engineering news.
+              </Typography>
+            </Box>
+          </Hidden>
         </Grid>
+        <Hidden smDown>
         <Grid item xs={12} md={6}>
           <ResourceCard size={'large'} resource={data.featuredResource} />
         </Grid>
-        <Hidden smDown>
+
         <div style={{
           backgroundColor: '#F5F4F2',
           width: '480px',

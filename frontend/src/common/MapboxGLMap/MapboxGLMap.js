@@ -38,6 +38,8 @@ const MapboxGLMap = (props) => {
         scrollZoom: false,
       });
 
+      map.addControl(new mapboxgl.NavigationControl());
+
       const marker = new mapboxgl.Marker()
         .setLngLat([results.features[0].center[0], results.features[0].center[1]])
         .addTo(map);

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography } from '@material-ui/core';
+import { lighten, makeStyles } from '@material-ui/core/styles';
+import { darken, Grid, Typography } from '@material-ui/core';
 import { SectionHeader } from 'components/molecules';
 import Image from '../../../../components/atoms/Image';
 import useTheme from '@material-ui/core/styles/useTheme';
@@ -15,6 +15,10 @@ const useStyles = makeStyles(theme => ({
   gridWrap: {
     justifyContent: 'center',
     paddingLeft: 100,
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: 0,
+      textAlign: 'center',
+    },
   },
   alternateService: {
     flexDirection: 'row-reverse',
@@ -23,6 +27,9 @@ const useStyles = makeStyles(theme => ({
     fontSize: '1.8rem',
     textTransform: 'uppercase',
     color: theme.palette.primary.main,
+    '&:hover': {
+      color: lighten(theme.palette.primary.main, 0.2),
+    }
   },
   serviceName: {
     '& a': {
@@ -102,20 +109,22 @@ const Services = props => {
           let image = serviceGroup.image.data.thumbnails.find(x => x.key === 'directus-medium-crop');
           return (
             <Grid item xs={12} key={index} data-aos="fade-up">
-              <Grid container spacing={0}
+              <Grid container spacing={6}
                     className={clsx({[classes.gridWrap]: true, [classes.alternateService]: index % 2 })}>
-                <Grid item sm={5} style={{ position: 'relative' }}>
+                <Grid item md={5} sm={12} style={{ position: 'relative' }}>
                   <Image src={image.url} width={300} height={300} alt={serviceGroup.name} />
                   <div className={clsx(classes['hexagon' + index], classes.hexagon)}>
                     <GreenHexagonSvg fill={hexagonColors[index]} />
                   </div>
                 </Grid>
-                <Grid item sm={5}>
+                <Grid item md={5} sm={12}>
                   <Typography
                     variant="h4"
                     color="textPrimary"
                     className={classes.serviceGroupName}
                     gutterBottom
+                    component={'a'}
+                    href={`services#${serviceGroup.id}`}
                   >
                     {serviceGroup.name}
                   </Typography>
@@ -125,7 +134,7 @@ const Services = props => {
                         <Typography
                           variant={'body1'}
                           component={'a'}
-                          href={`services/${service.id}`}
+                          href={`services#${serviceGroup.id}_${service.id}`}
                         >
                           {service.name}
                         </Typography>

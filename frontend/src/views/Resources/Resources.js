@@ -39,7 +39,7 @@ const Resources = ({ data }) => {
       <Section disablePadding>
         <Hero data={data}/>
       </Section>
-      <Section disablePadding>
+      <Section>
         <ResourceList data={data}/>
       </Section>
     </div>

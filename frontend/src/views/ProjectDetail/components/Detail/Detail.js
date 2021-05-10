@@ -9,7 +9,7 @@ import moment from 'moment';
 const useStyles = makeStyles(theme => ({
   root: {},
   title: {
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
   },
   body: {
     '& p': {
@@ -37,9 +37,9 @@ const useStyles = makeStyles(theme => ({
     '& a': {
       color: theme.palette.primary.main,
       '&:hover': {
-        textDecoration: 'underline'
-      }
-    }
+        textDecoration: 'underline',
+      },
+    },
   },
   date: {
     fontSize: '14px',
@@ -47,13 +47,15 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2),
     '& span': {
       color: theme.palette.primary.main,
-    }
+    },
   },
 }));
 
 const Detail = props => {
   const { project, className, ...rest } = props;
   const classes = useStyles();
+
+  console.log(project.people);
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
@@ -79,22 +81,30 @@ const Detail = props => {
       <Typography variant="h6" className={clsx(classes.date)}>
         {project.people && (
           <>
-            People <span>{project.people.map(x => x.people_id.name).join(', ')}</span>
+            People <span>{project.people.map(x => x.people_id?.name).join(', ')}</span>
           </>
         )}
       </Typography>
       <Box pb={2} pt={2}>
-      <Image src={project.image.data.full_url} alt={project.name} />
+        <Image src={project.image?.data.full_url} alt={project.name} />
       </Box>
       <Typography
         variant="body2"
         className={classes.body}
         gutterBottom
       >
-        <div dangerouslySetInnerHTML={{__html: project.body}} />
+        <div dangerouslySetInnerHTML={{ __html: project.body }} />
       </Typography>
+      {project.project_date && (
+        <Typography
+          variant="caption"
+          gutterBottom
+        >
+          Project Date: {moment(project.project_date).format('MMMM D, YYYY')}
+        </Typography>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default Detail;
