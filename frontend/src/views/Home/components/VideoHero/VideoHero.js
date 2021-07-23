@@ -80,7 +80,7 @@ const VideoHero = props => {
       </div>
       )}
       <video className={classes.video} autoPlay="autoplay" muted="muted" poster="none" loop="true">
-        <source src="/videos/lre-hero.mp4" type="video/mp4"/>
+        <source src={`${process.env.DIRECTUS_ENDPOINT}/assets/qemacq11qfk8cwso`} type="video/mp4"/>
       </video>
       <SectionHeader
         className={classes.header}
