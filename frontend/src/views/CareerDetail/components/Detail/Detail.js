@@ -2,7 +2,6 @@ import { Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Image from '../../../../components/atoms/Image';
 import Box from '@material-ui/core/Box';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
@@ -112,11 +111,11 @@ const Detail = props => {
             </Typography>
             <Collapse in={isExpanded} timeout="auto" unmountOnExit>
               <Box ml={6} pb={6}>
-              <Typography variant="body2" style={{
-                marginBottom: theme.spacing(4)
-              }}>
-                <div className={classes.body} dangerouslySetInnerHTML={{ __html: position.body }} />
+              <Typography variant="body2">
               </Typography>
+                <div style={{
+                  marginBottom: theme.spacing(4)
+                }} className={classes.body} dangerouslySetInnerHTML={{ __html: position.body }} />
               <Button variant="outlined" color="primary" href={position.apply_cta_url} target="_blank" size="large">Apply Now</Button>
               </Box>
             </Collapse>

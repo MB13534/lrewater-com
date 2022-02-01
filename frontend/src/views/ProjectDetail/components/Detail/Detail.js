@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Link, Typography } from '@material-ui/core';
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     '& h2': {
       color: theme.palette.primary.main,
       textTransform: 'uppercase',
-      fontFamily: '\'Montserrat\'',
+      fontFamily: "'Montserrat'",
       fontWeight: 900,
       fontSize: '26px',
       marginBottom: theme.spacing(4),
@@ -55,51 +55,55 @@ const Detail = props => {
   const { project, className, ...rest } = props;
   const classes = useStyles();
 
-  console.log(project.people);
-
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <Typography variant="h6" className={clsx(classes.date)}>
         {project.project_location && (
-          <>Project Location <span>{project.project_location}</span></>
+          <>
+            Project Location <span>{project.project_location}</span>
+          </>
         )}
         {project.service_groups && (
           <>
-            {project.project_location && (<>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</>)}
-            Services <span>{project.service_groups.map(x => x.service_groups_id.name).join(', ')}</span>
+            {project.project_location && <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</>}
+            Services{' '}
+            <span>
+              {project.service_groups.map((service, i) => (
+                <React.Fragment key={i}>
+                  <Link href={`/services#${service.service_groups_id.id}`}>{service.service_groups_id.name}</Link>
+                  {i < project.service_groups.length - 1 && ', '}
+                </React.Fragment>
+              ))}
+            </span>
           </>
         )}
       </Typography>
-      <Typography
-        variant="h1"
-        color="textPrimary"
-        className={classes.title}
-        gutterBottom
-      >
+      <Typography variant="h1" color="textPrimary" className={classes.title} gutterBottom>
         {project.name}
       </Typography>
       <Typography variant="h6" className={clsx(classes.date)}>
         {project.people && (
           <>
-            People <span>{project.people.map(x => x.people_id?.name).join(', ')}</span>
+            People{' '}
+            <span>
+              {project.people.map((person, i) => (
+                <React.Fragment key={i}>
+                  <Link href="/who-we-are#our-people">{person.people_id?.name}</Link>
+                  {i < project.people.length - 1 && ', '}
+                </React.Fragment>
+              ))}
+            </span>
           </>
         )}
       </Typography>
       <Box pb={2} pt={2}>
         <Image src={project.image?.data.full_url} alt={project.name} />
       </Box>
-      <Typography
-        variant="body2"
-        className={classes.body}
-        gutterBottom
-      >
-        <div dangerouslySetInnerHTML={{ __html: project.body }} />
+      <Typography variant="body2" className={classes.body} gutterBottom>
       </Typography>
+      <div className={classes.body}  dangerouslySetInnerHTML={{ __html: project.body }} />
       {project.project_date && (
-        <Typography
-          variant="caption"
-          gutterBottom
-        >
+        <Typography variant="caption" gutterBottom>
           Project Date: {moment(project.project_date).format('MMMM D, YYYY')}
         </Typography>
       )}

@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { SectionHeader } from '../../../../components/molecules';
 import useTheme from '@material-ui/core/styles/useTheme';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Image from '../../../../components/atoms/Image';
 import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -42,10 +40,9 @@ const Benefits = props => {
           <Typography
             variant="body2"
             className={classes.body}
-            style={{marginBottom: theme.spacing(6)}}
           >
-            <div dangerouslySetInnerHTML={{ __html: data.pageData.benefits_body }} />
           </Typography>
+          <div className={classes.body} style={{marginBottom: theme.spacing(6)}} dangerouslySetInnerHTML={{ __html: data.pageData.benefits_body }} />
         </Grid>
       </Grid>
     </div>

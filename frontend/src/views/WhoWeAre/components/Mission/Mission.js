@@ -9,7 +9,7 @@ import Image from '../../../../components/atoms/Image';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {},
 }));
 
@@ -42,10 +42,9 @@ const Mission = props => {
         <Grid item xs={12}>
           <Typography
             variant="body2"
-            style={{marginBottom: theme.spacing(6)}}
           >
-            <div dangerouslySetInnerHTML={{ __html: data.pageData.mission_body }} />
           </Typography>
+          <div style={{marginBottom: theme.spacing(6)}} dangerouslySetInnerHTML={{ __html: data.pageData.mission_body }} />
           <Button
             variant={'outlined'}
             size={'large'}

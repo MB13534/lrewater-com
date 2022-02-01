@@ -63,10 +63,9 @@ const Videos = props => {
         <Grid item xs={12}>
           <Typography
             variant="body2"
-            style={{marginBottom: theme.spacing(6)}}
           >
-            <div dangerouslySetInnerHTML={{ __html: embed }} />
           </Typography>
+          <div style={{marginBottom: theme.spacing(6)}} dangerouslySetInnerHTML={{ __html: embed }} />
         </Grid>
         <Grid item xs={12}>
           {data.pageData.annual_videos.map((video, i) =>

@@ -2,11 +2,9 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import useTheme from '@material-ui/core/styles/useTheme';
-import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
 import { SectionHeader } from '../../../../components/molecules';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {},
 }));
 
@@ -15,7 +13,6 @@ const Gallery = props => {
   const classes = useStyles();
   const theme = useTheme();
 
-  console.log(data);
   return (
     <div className={clsx(classes.root, className)} {...rest}>
       <SectionHeader
@@ -32,16 +29,10 @@ const Gallery = props => {
         }}
       />
 
-      <div className={clsx('fotorama')}
-           data-width="100%"
-           data-ratio="800/600"
-           data-nav="thumbs"
-      >
+      <div className={clsx('fotorama')} data-width="100%" data-ratio="800/600" data-nav="thumbs">
         {data.pageData.gallery_images.map((image, i) => {
-            const imgUrl = image.directus_files_id.data.thumbnails.find(x => x.key === 'directus-large-crop').url;
-          return (
-            <img key={i} src={imgUrl} />
-          )
+          const imgUrl = image.directus_files_id.data.thumbnails.find(x => x.key === 'directus-large-crop').url;
+          return <img key={i} src={imgUrl} alt="Team Photos" />;
         })}
       </div>
     </div>

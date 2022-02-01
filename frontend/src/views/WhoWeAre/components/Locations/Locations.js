@@ -57,7 +57,7 @@ const Locations = props => {
       />
       <Grid container spacing={4} style={{justifyContent:'center'}}>
         {data.locations.map((location, i) => (
-          <Grid item xs={12} md={6}>
+          <Grid key={i} item xs={12} md={6}>
             <MapboxGLMap address={location.address}/>
             <Typography variant="h6" className={classes.name}>
               {location.name}

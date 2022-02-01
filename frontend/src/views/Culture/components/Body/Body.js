@@ -5,7 +5,7 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {},
 }));
 
@@ -20,10 +20,9 @@ const Body = props => {
         <Grid item xs={12}>
           <Typography
             variant="body2"
-            style={{marginBottom: theme.spacing(6)}}
           >
-            <div dangerouslySetInnerHTML={{ __html: data.pageData.body }} />
           </Typography>
+          <div style={{marginBottom: theme.spacing(6)}} dangerouslySetInnerHTML={{ __html: data.pageData.body }} />
         </Grid>
       </Grid>
     </div>

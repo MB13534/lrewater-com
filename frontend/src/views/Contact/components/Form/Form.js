@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2, 8),
     [theme.breakpoints.down('sm')]: {
       margin: theme.spacing(1, 2),
-    }
+    },
   },
   form: {
     width: '100%',
@@ -23,9 +23,8 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('sm')]: {
       paddingRight: theme.spacing(4),
     },
-  }
+  },
 }));
-
 
 const Form = props => {
   const { data, className, ...rest } = props;
@@ -33,36 +32,15 @@ const Form = props => {
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
-      <form name="contact" netlify="true" className={classes.form}>
+      <form name="contact" data-netlify="true" className={classes.form} method="post">
+        <input type="hidden" name="form-name" value="contact" />
         <Box pb={4}>
-          <TextField
-            label="Full Name"
-            variant={'outlined'}
-            fullWidth
-            className={classes.textField}
-          />
-          <TextField
-            label="E-Mail"
-            variant={'outlined'}
-            fullWidth
-            className={classes.textField}
-          />
-          <TextField
-            label="Message"
-            variant={'outlined'}
-            fullWidth
-            multiline
-            rows={4}
-            className={classes.textField}
-          />
+          <TextField label="Full Name" variant={'outlined'} fullWidth className={classes.textField} />
+          <TextField label="E-Mail" variant={'outlined'} fullWidth className={classes.textField} />
+          <TextField label="Message" variant={'outlined'} fullWidth multiline rows={4} className={classes.textField} />
         </Box>
         <Box ml={8}>
-          <Button
-            variant={'outlined'}
-            size={'large'}
-            color={'primary'}
-            href={'/contact'}
-          >
+          <Button variant={'outlined'} size={'large'} color={'primary'} href={'/contact'} type="submit">
             Send Message
           </Button>
         </Box>

@@ -13,7 +13,8 @@ const ContactPage = ({ data }) => {
 };
 
 export async function getStaticProps() {
-  let res, json = null;
+  let res,
+    json = null;
 
   res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/locations?fields=*.*`);
   json = await res.json();

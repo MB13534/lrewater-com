@@ -35,8 +35,8 @@ const useStyles = makeStyles(theme => ({
   expanded: {
     '& h4': {
       color: theme.palette.brand.primary,
-    }
-  }
+    },
+  },
 }));
 
 const ServiceGroups = props => {
@@ -46,7 +46,7 @@ const ServiceGroups = props => {
 
   const [expanded, setExpanded] = useState(false);
 
-  const handleChange = (panel) => {
+  const handleChange = panel => {
     setExpanded(expanded === panel ? false : panel);
   };
 
@@ -54,7 +54,7 @@ const ServiceGroups = props => {
     if (window.location.hash) {
       setExpanded(`service${window.location.hash.slice(1)}`);
     }
-  }, [])
+  }, []);
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
@@ -75,71 +75,71 @@ const ServiceGroups = props => {
       {data.serviceGroups.map((serviceGroup, i) => {
         let image = serviceGroup.image.data.thumbnails.find(x => x.key === 'directus-medium-contain');
         return (
-          <Grid key={i} container spacing={4} className={classes.serviceGroupWrap}>
-            <Grid item xs={12} md={3}>
-              <Box mt={8}>
-              <Image src={image.url} width={'100%'} height="auto" alt={serviceGroup.name} />
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={9}>
-              <a name={`${serviceGroup.id}`} style={{
-                display: 'block',
-                position: 'relative',
-                top: '-140px',
-                visibility: 'hidden',
-              }}/>
-              <Typography
-                variant="h3"
-                className={classes.serviceGroupName}
-                gutterBottom
-              >
-                {serviceGroup.name}
-              </Typography>
-              <Typography variant="body2" style={{marginBottom: theme.spacing(6)}}>
-                <span dangerouslySetInnerHTML={{ __html: serviceGroup.description }} />
-              </Typography>
+            <Grid key={i} container spacing={4} className={classes.serviceGroupWrap}>
+              <Grid item xs={12} md={3}>
+                <Box mt={8}>
+                  <Image src={image.url} width={'100%'} height="auto" alt={serviceGroup.name} />
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={9}>
+                <a
+                  name={`${serviceGroup.id}`}
+                  style={{
+                    display: 'block',
+                    position: 'relative',
+                    top: '-140px',
+                    visibility: 'hidden',
+                  }}
+                />
+                <Typography variant="h3" className={classes.serviceGroupName} gutterBottom>
+                  {serviceGroup.name}
+                </Typography>
+                <Typography variant="body2" style={{ marginBottom: theme.spacing(6) }}>
+                  <span dangerouslySetInnerHTML={{ __html: serviceGroup.description }} />
+                </Typography>
 
-              {serviceGroup.services.map((service, j) => {
-                const isExpanded = expanded === `service${serviceGroup.id}_${service.id}`;
-                return (
-                  <div key={j} className={clsx({[classes.expanded]: isExpanded})}>
-                    <a name={`${serviceGroup.id}_${service.id}`} style={{
-                      display: 'block',
-                      position: 'relative',
-                      top: '-130px',
-                      visibility: 'hidden',
-                    }}/>
-                    <Typography
-                      variant="h4"
-                      className={classes.serviceName}
-                      onClick={() => handleChange(`service${serviceGroup.id}_${service.id}`)}
-                    >
-                    <div
-                      className={classes.toggleButton}
-                    >
-                      {isExpanded && (
-                        <RemoveIcon fontSize="large" />
-                      )}
-                      {!isExpanded && (
-                        <AddIcon fontSize="large" />
-                      )}
-                    </div>
-                      {service.name}
-                    </Typography>
-                    <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-                      <Typography variant="body2" style={{
-                        marginLeft: 50,
-                        marginBottom: theme.spacing(4)
-                      }}>
-                        <span dangerouslySetInnerHTML={{ __html: service.description }} />
+                {serviceGroup.services.map((service, j) => {
+                  const isExpanded = expanded === `service${serviceGroup.id}_${service.id}`;
+                  return (
+                    <div key={j} className={clsx({ [classes.expanded]: isExpanded })}>
+                      <a
+                        name={`${serviceGroup.id}_${service.id}`}
+                        style={{
+                          display: 'block',
+                          position: 'relative',
+                          top: '-130px',
+                          visibility: 'hidden',
+                        }}
+                      />
+                      <Typography
+                        variant="h4"
+                        className={classes.serviceName}
+                        onClick={() => handleChange(`service${serviceGroup.id}_${service.id}`)}
+                      >
+                        <div className={classes.toggleButton}>
+                          {isExpanded && <RemoveIcon fontSize="large" />}
+                          {!isExpanded && <AddIcon fontSize="large" />}
+                        </div>
+                        {service.name}
                       </Typography>
-                    </Collapse>
-                    <Divider />
-                  </div>
-                )
-              })}
+                      <Collapse in={isExpanded} timeout="auto" unmountOnExit>
+                        <Typography
+                          variant="body2"
+                          style={{
+                            marginLeft: 50,
+                            marginBottom: theme.spacing(4),
+                          }}
+                        >
+                          <span dangerouslySetInnerHTML={{ __html: service.description }} />
+                        </Typography>
+                      </Collapse>
+                      <Divider />
+                    </div>
+                  );
+                })}
+              </Grid>
             </Grid>
-          </Grid>
+
         );
       })}
     </div>

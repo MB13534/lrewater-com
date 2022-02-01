@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
 import { SectionHeader } from 'components/molecules';
 
 const useStyles = makeStyles(theme => ({
@@ -15,8 +14,8 @@ const useStyles = makeStyles(theme => ({
     margin: '0',
     display: 'flex',
     [theme.breakpoints.down('sm')]: {
-      backgroundSize: 'cover'
-    }
+      backgroundSize: 'cover',
+    },
   },
   header: {
     alignSelf: 'center',
@@ -30,8 +29,8 @@ const useStyles = makeStyles(theme => ({
     width: '400px',
     opacity: 0.8,
     [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
   hexagon2: {
     position: 'absolute',
@@ -42,21 +41,28 @@ const useStyles = makeStyles(theme => ({
     opacity: 0.8,
     transform: 'scale(0.7)',
     [theme.breakpoints.down('sm')]: {
-      display: 'none'
-    }
+      display: 'none',
+    },
   },
 }));
 
-const HexagonSvg = ({color}) =>
-  <svg style={{width: '100%', height: '100%'}} width="590" height="680" viewBox="0 0 590 680" fill={color} xmlns="http://www.w3.org/2000/svg">
+const HexagonSvg = ({ color }) => (
+  <svg
+    style={{ width: '100%', height: '100%' }}
+    width="590"
+    height="680"
+    viewBox="0 0 590 680"
+    fill={color}
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path d="M294.804 0L589.607 170V510L294.804 680L0 510V170L294.804 0Z" />
-  </svg>;
+  </svg>
+);
 
 const PageHero = props => {
   const { data, className, ...rest } = props;
   const classes = useStyles();
   const theme = useTheme();
-
 
   const heroBgStyle = {
     position: 'relative',
@@ -85,7 +91,6 @@ const PageHero = props => {
             width: '85%',
             textShadow: '3px 3px 0px rgba(0,0,0,0.2)',
             marginLeft: theme.spacing(8),
-
           },
         }}
         subtitleProps={{
@@ -98,7 +103,7 @@ const PageHero = props => {
             width: '65%',
             textShadow: '1px 1px 0px rgba(0,0,0,0.2)',
             marginLeft: theme.spacing(8),
-          }
+          },
         }}
         data-aos="fade-up"
         disableGutter

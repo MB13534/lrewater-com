@@ -76,9 +76,7 @@ const useStyles = makeStyles(theme => ({
   textCell: {
     alignSelf: 'center',
     paddingLeft: theme.spacing(3),
-    '&:hover': {
-
-    }
+    '&:hover': {},
   },
   formGroupLabel: {
     color: '#c4c4c4',
@@ -86,12 +84,12 @@ const useStyles = makeStyles(theme => ({
   },
   sortLabel: {
     '& .MuiFormControlLabel-label': {
-      fontFamily: '\'Montserrat\', sans-serif',
+      fontFamily: "'Montserrat', sans-serif",
       fontSize: '20px',
       fontWeight: 300,
       lineHeight: 1.7,
     },
-  }
+  },
 }));
 
 const ProjectList = props => {
@@ -107,12 +105,12 @@ const ProjectList = props => {
 
   const [filteredProjects, setFilteredProjects] = useState(data.projects);
 
-  const handleSortChange = (event) => {
+  const handleSortChange = event => {
     setSort(event.target.value);
-  }
+  };
 
   useEffect(() => {
-    setFilteredProjects((prevState) => {
+    setFilteredProjects(() => {
       let newState = [...data.projects];
 
       if (selectedPeople) {
@@ -120,11 +118,15 @@ const ProjectList = props => {
       }
 
       if (selectedServices) {
-        newState = newState.filter(x => typeof x.service_groups.find(y => y.service_groups_id === selectedServices.id) !== 'undefined');
+        newState = newState.filter(
+          x => typeof x.service_groups.find(y => y.service_groups_id === selectedServices.id) !== 'undefined'
+        );
       }
 
       if (selectedExpertises) {
-        newState = newState.filter(x => typeof x.expertises.find(y => y.expertise_id === selectedExpertises.id) !== 'undefined');
+        newState = newState.filter(
+          x => typeof x.expertises.find(y => y.expertise_id === selectedExpertises.id) !== 'undefined'
+        );
       }
 
       if (selectedLocations) {
@@ -132,24 +134,20 @@ const ProjectList = props => {
       }
 
       if (sort === 'alphabetical') {
-        newState = newState.sort((a,b)=> (a.name > b.name ? 1 : -1));
+        newState = newState.sort((a, b) => (a.name > b.name ? 1 : -1));
       }
 
       if (sort === 'chronological') {
-        newState = newState.sort((a,b)=> (a.project_date > b.project_date ? 1 : -1));
+        newState = newState.sort((a, b) => (a.project_date > b.project_date ? 1 : -1));
       }
 
       return newState;
-    })
+    });
   }, [sort, selectedPeople, selectedServices, selectedExpertises, selectedLocations]);
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
-      <Typography
-        variant="h5"
-        className={classes.formGroupLabel}
-        gutterBottom
-        >
+      <Typography variant="h5" className={classes.formGroupLabel} gutterBottom>
         Filter By:
       </Typography>
       <Grid container spacing={2}>
@@ -159,11 +157,9 @@ const ProjectList = props => {
             options={data.people}
             value={selectedPeople}
             getOptionLabel={option => option.name}
-            getOptionSelected={(option, value) =>
-              option.id === value.id
-            }
+            getOptionSelected={(option, value) => option.id === value.id}
             onChange={(event, value) => setSelectedPeople(value)}
-            renderInput={(params) => (
+            renderInput={params => (
               <TextField
                 {...params}
                 variant="filled"
@@ -182,11 +178,9 @@ const ProjectList = props => {
             options={data.serviceGroups}
             value={selectedServices}
             getOptionLabel={option => option.name}
-            getOptionSelected={(option, value) =>
-              option.id === value.id
-            }
+            getOptionSelected={(option, value) => option.id === value.id}
             onChange={(event, value) => setSelectedServices(value)}
-            renderInput={(params) => (
+            renderInput={params => (
               <TextField
                 {...params}
                 variant="filled"
@@ -205,11 +199,9 @@ const ProjectList = props => {
             options={data.expertises}
             value={selectedExpertises}
             getOptionLabel={option => option.name}
-            getOptionSelected={(option, value) =>
-              option.id === value.id
-            }
+            getOptionSelected={(option, value) => option.id === value.id}
             onChange={(event, value) => setSelectedExpertises(value)}
-            renderInput={(params) => (
+            renderInput={params => (
               <TextField
                 {...params}
                 variant="filled"
@@ -228,11 +220,9 @@ const ProjectList = props => {
             options={data.locations}
             value={selectedLocations}
             getOptionLabel={option => option.name}
-            getOptionSelected={(option, value) =>
-              option.id === value.id
-            }
+            getOptionSelected={(option, value) => option.id === value.id}
             onChange={(event, value) => setSelectedLocations(value)}
-            renderInput={(params) => (
+            renderInput={params => (
               <TextField
                 {...params}
                 variant="filled"
@@ -246,61 +236,62 @@ const ProjectList = props => {
           />
         </Grid>
       </Grid>
-      <Grid container spacing={0} style={{marginTop: theme.spacing(4)}}>
-        <Grid item xs={12} sm={2} style={{alignSelf: 'center'}}>
-          <Typography
-            variant="h5"
-            className={classes.formGroupLabel}
-          >
+      <Grid container spacing={0} style={{ marginTop: theme.spacing(4) }}>
+        <Grid item xs={12} sm={2} style={{ alignSelf: 'center' }}>
+          <Typography variant="h5" className={classes.formGroupLabel}>
             Sort By:
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={10} style={{alignSelf: 'center'}}>
+        <Grid item xs={12} sm={10} style={{ alignSelf: 'center' }}>
           <RadioGroup aria-label="sort" name="sort" value={sort} onChange={handleSortChange} row>
-            <FormControlLabel value="alphabetical" control={<Radio />} label="Alphabetical" className={classes.sortLabel} />
-            <FormControlLabel value="chronological" control={<Radio />} label="Chronological" className={classes.sortLabel} />
+            <FormControlLabel
+              value="alphabetical"
+              control={<Radio />}
+              label="Alphabetical"
+              className={classes.sortLabel}
+            />
+            <FormControlLabel
+              value="chronological"
+              control={<Radio />}
+              label="Chronological"
+              className={classes.sortLabel}
+            />
           </RadioGroup>
         </Grid>
       </Grid>
-      <Grid container spacing={0} style={{marginTop: theme.spacing(8)}}>
+      <Grid container spacing={0} style={{ marginTop: theme.spacing(8) }}>
         {filteredProjects.length === 0 && (
           <Box>
-            <Typography
-              variant={'body'}
-              >
-              No results found for the selected criteria.
-            </Typography>
+            <Typography variant={'body2'}>No results found for the selected criteria.</Typography>
           </Box>
         )}
-        {filteredProjects.map((project, i) => (
-          project.image && (
-            <Grid key={i} item xs={12} md={6} style={{paddingRight: '20px'}}>
-              <Link href={`/projects/${project.id}`} className={classes.projectLink}>
-                <Grid container spacing={0} className={clsx('text-wrap', classes.textWrap)}>
-                  <Grid item xs={4}>
-                    <Image
-                      src={project.image.data.thumbnails.find(x => x.key === 'directus-medium-crop').url}
-                      width={'100%'}
-                      height="auto"
-                      alt={project.name}
-                      style={{ maxWidth: '170px' }}
-                      lazy={false}
-                      className={clsx('project-image', classes.projectImage)}
-                    />
+        {filteredProjects.map(
+          (project, i) =>
+            project.image && (
+              <Grid key={i} item xs={12} md={6} style={{ paddingRight: '20px' }}>
+                <Link href={`/projects/${project.id}`} className={classes.projectLink}>
+                  <Grid container spacing={0} className={clsx('text-wrap', classes.textWrap)}>
+                    <Grid item xs={4}>
+                      <Image
+                        src={project.image.data.thumbnails.find(x => x.key === 'directus-medium-crop').url}
+                        width={'100%'}
+                        height="auto"
+                        alt={project.name}
+                        style={{ maxWidth: '170px' }}
+                        lazy={false}
+                        className={clsx('project-image', classes.projectImage)}
+                      />
+                    </Grid>
+                    <Grid item xs={8} className={clsx('text-wrap', classes.textCell)}>
+                      <Typography variant="h5" className={clsx('person-name', classes.personName)}>
+                        {project.name}
+                      </Typography>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={8} className={clsx('text-wrap', classes.textCell)}>
-                    <Typography
-                      variant="h5"
-                      className={clsx('person-name', classes.personName)}
-                    >
-                      {project.name}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Link>
-            </Grid>
-          )
-        ))}
+                </Link>
+              </Grid>
+            )
+        )}
       </Grid>
     </div>
   );

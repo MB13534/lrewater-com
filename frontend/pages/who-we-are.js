@@ -13,7 +13,8 @@ const WhoWeArePage = ({ data }) => {
 };
 
 export async function getStaticProps() {
-  let res, json = null;
+  let res,
+    json = null;
 
   res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/people?fields=*.*`);
   json = await res.json();
@@ -31,6 +32,10 @@ export async function getStaticProps() {
   json = await res.json();
   let siteSettings = json.data;
 
+  res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/people_types?fields=*.*.*`);
+  json = await res.json();
+  let peopleTypes = json.data;
+
   return {
     props: {
       data: {
@@ -38,6 +43,7 @@ export async function getStaticProps() {
         locations,
         pageData,
         siteSettings,
+        peopleTypes,
       },
     },
   };

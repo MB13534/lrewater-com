@@ -13,7 +13,8 @@ const CareersPage = ({ data }) => {
 };
 
 export async function getStaticProps() {
-  let res, json = null;
+  let res,
+    json = null;
 
   res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/locations?fields=*.*`);
   json = await res.json();
@@ -27,12 +28,17 @@ export async function getStaticProps() {
   json = await res.json();
   let siteSettings = json.data;
 
+  res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/testimonials?fields=*.*`);
+  json = await res.json();
+  let testimonials = json.data;
+
   return {
     props: {
       data: {
         locations,
         pageData,
         siteSettings,
+        testimonials,
       },
     },
   };

@@ -12,7 +12,8 @@ const ResourcesPage = ({ data }) => {
 };
 
 export async function getStaticProps() {
-  let res, json = null;
+  let res,
+    json = null;
 
   res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/resources?fields=*.*.*`);
   json = await res.json();
@@ -26,12 +27,37 @@ export async function getStaticProps() {
   json = await res.json();
   let siteSettings = json.data;
 
+  res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/people?fields=*.*`);
+  json = await res.json();
+  let people = json.data;
+
+  res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/services?fields=*.*`);
+  json = await res.json();
+  let services = json.data;
+
+  res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/service_groups?fields=*.*`);
+  json = await res.json();
+  let serviceGroups = json.data;
+
+  res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/expertises?fields=*.*`);
+  json = await res.json();
+  let expertises = json.data;
+
+  res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/projects?fields=*.*`);
+  json = await res.json();
+  let projects = json.data;
+
   let pageData = {};
 
   return {
     props: {
       data: {
+        people,
+        services,
+        serviceGroups,
         resources,
+        projects,
+        expertises,
         resourceTypes,
         pageData,
         siteSettings,

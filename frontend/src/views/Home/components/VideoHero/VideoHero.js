@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { SectionHeader } from 'components/molecules';
-import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -75,11 +74,11 @@ const VideoHero = props => {
   return (
     <div className={clsx(classes.root, className)} style={heroBgStyle} {...rest}>
       {data.show_hexagon && (
-      <div className={classes.hexagon}>
-        <HexagonSvg />
-      </div>
+        <div className={classes.hexagon}>
+          <HexagonSvg />
+        </div>
       )}
-      <video className={classes.video} autoPlay="autoplay" muted="muted" poster="none" loop="true">
+      <video className={classes.video} autoPlay="autoplay" muted loop={true}>
         <source src={`${process.env.DIRECTUS_ENDPOINT}/assets/qemacq11qfk8cwso`} type="video/mp4"/>
       </video>
       <SectionHeader

@@ -37,8 +37,8 @@ const Values = props => {
       />
       <Grid container spacing={6}>
         {Object.entries(data.pageData.values).map(([key, value]) => (
-          <Grid item xs={12} md={6}>
-            <div key={key} style={{marginRight: theme.spacing(6)}}>
+          <Grid key={key} item xs={12} md={6}>
+            <div style={{marginRight: theme.spacing(6)}}>
               <Typography
                 variant="h3"
                 className={classes.valueName}
@@ -46,9 +46,10 @@ const Values = props => {
               >
                 {key}
               </Typography>
-              <Typography variant="body2" style={{ marginBottom: theme.spacing(6) }}>
-                <div dangerouslySetInnerHTML={{ __html: value }} />
+              <Typography variant="body2" >
+
               </Typography>
+              <div style={{ marginBottom: theme.spacing(6) }} dangerouslySetInnerHTML={{ __html: value }} />
             </div>
           </Grid>
         ))}

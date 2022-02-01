@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { SectionHeader } from '../../../../components/molecules';
@@ -7,11 +7,24 @@ import Grid from '@material-ui/core/Grid';
 import Image from '../../../../components/atoms/Image';
 import { Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
-import { PeopleAlt } from '@material-ui/icons';
 import PeopleModal from './PeopleModal';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(theme => ({
   root: {},
+  formGroupLabel: {
+    color: '#c4c4c4',
+    textTransform: 'uppercase',
+  },
+  sortLabel: {
+    '& .MuiFormControlLabel-label': {
+      fontFamily: "'Montserrat', sans-serif",
+      fontSize: '20px',
+      fontWeight: 300,
+      lineHeight: 1.7,
+    },
+  },
   personName: {
     textTransform: 'uppercase',
     textAlign: 'center',
@@ -32,7 +45,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: '16px',
       fontWeight: 'normal',
       textTransform: 'none',
-    }
+    },
   },
   personImage: {
     overflow: 'hidden',
@@ -54,16 +67,30 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.primary.main,
       opacity: 0.5,
     },
-    '&:hover': {
-
-    }
-  }
+    '&:hover': {},
+  },
 }));
 
 const People = props => {
   const { data, className, ...rest } = props;
   const classes = useStyles();
   const theme = useTheme();
+
+  const [selectedPeopleType, setSelectedPeopleType] = useState(null);
+
+  const [filteredPeople, setFilteredPeople] = useState(data.people);
+
+  useEffect(() => {
+    setFilteredPeople(() => {
+      let newState = [...data.people];
+
+      if (selectedPeopleType) {
+        newState = newState.filter(x => x.people_types.find(y => y.people_types_id === selectedPeopleType.id));
+      }
+
+      return newState;
+    });
+  }, [selectedPeopleType]);
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
@@ -76,26 +103,52 @@ const People = props => {
             color: 'black',
             textTransform: 'uppercase',
             textShadow: '3px 3px 0px rgba(0,0,0,0.2)',
-            marginBottom: theme.spacing(12),
+            marginBottom: theme.spacing(4),
           },
         }}
       />
-      <Grid container spacing={8}>
+      <Typography variant="h5" className={classes.formGroupLabel} gutterBottom>
+        Filter By:
+      </Typography>
+      <Grid item xs={12} sm={6} md={3}>
+        <Autocomplete
+          id="PeopleFilter"
+          options={data.peopleTypes}
+          value={selectedPeopleType}
+          getOptionLabel={option => option.name}
+          getOptionSelected={(option, value) => option.id === value.id}
+          onChange={(event, value) => setSelectedPeopleType(value)}
+          renderInput={params => (
+            <TextField
+              {...params}
+              variant="filled"
+              label="Service Teams"
+              placeholder="Select Service Team"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          )}
+        />
+      </Grid>
+      <Grid container spacing={8} style={{ marginTop: theme.spacing(4) }}>
         {data.people.map((person, i) => {
-
           const [open, setOpen] = useState(false);
 
           function handleClose() {
             setOpen(false);
           }
 
-          console.log(person.image.data.thumbnails);
-
           return (
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid key={i} item xs={12} sm={6} md={3} style={{ display: filteredPeople.includes(person) ? 'block' : 'none' }}>
               <PeopleModal person={person} open={open} setOpen={setOpen} onClose={handleClose} />
-              <Link href={`#`} className={classes.personImage}
-                    onClick={(e) => { e.preventDefault(); setOpen(true); }}
+              <Link
+                href={`#`}
+                className={classes.personImage}
+                onClick={e => {
+                  e.preventDefault();
+                  setOpen(true);
+                }}
               >
                 <Image
                   src={person.image.data.thumbnails.find(x => x.key === 'directus-medium-crop').url}
@@ -103,22 +156,16 @@ const People = props => {
                   height="auto"
                   alt={person.name}
                 />
-                <Typography
-                  variant="h6"
-                  className={classes.personTitle}
-                >
+                <Typography variant="h6" className={classes.personTitle}>
                   {person.title}
                   <p>{person.location && person.location.name}</p>
                 </Typography>
               </Link>
-              <Typography
-                variant="h5"
-                className={classes.personName}
-              >
+              <Typography variant="h5" className={classes.personName}>
                 {person.name}
               </Typography>
             </Grid>
-          )
+          );
         })}
       </Grid>
     </div>

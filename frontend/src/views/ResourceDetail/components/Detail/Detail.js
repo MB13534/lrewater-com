@@ -85,8 +85,8 @@ const Detail = props => {
         className={classes.body}
         gutterBottom
       >
-        <div dangerouslySetInnerHTML={{__html: resource.body}} />
       </Typography>
+      <div className={classes.body} dangerouslySetInnerHTML={{__html: resource.body}} />
     </div>
   )
 }

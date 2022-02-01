@@ -13,28 +13,30 @@ const IndexPage = ({ data }) => {
 };
 
 export async function getStaticPaths() {
-  let res, json = null;
+  let res,
+    json = null;
 
   res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/locations?fields=id`);
   json = await res.json();
   let locations = json.data;
 
   return {
-    paths: locations.map(location => (
-      { params: { id: location.id.toString() } }
-    )),
+    paths: locations.map(location => ({ params: { id: location.id.toString() } })),
     fallback: false,
   };
 }
 
 export async function getStaticProps({ params }) {
-  let res, json = null;
+  let res,
+    json = null;
 
   res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/locations/${params.id}?fields=*.*`);
   json = await res.json();
   let location = json.data;
 
-  res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/positions?filter[locations.locations_id.id][eq]=${params.id}&fields=*.*.*`);
+  res = await fetch(
+    `${process.env.DIRECTUS_ENDPOINT}/items/positions?filter[locations.locations_id.id][eq]=${params.id}&fields=*.*.*`
+  );
   json = await res.json();
   let positions = json.data;
 
@@ -46,6 +48,10 @@ export async function getStaticProps({ params }) {
   json = await res.json();
   let siteSettings = json.data;
 
+  res = await fetch(`${process.env.DIRECTUS_ENDPOINT}/items/testimonials?fields=*.*`);
+  json = await res.json();
+  let testimonials = json.data;
+
   return {
     props: {
       data: {
@@ -53,6 +59,7 @@ export async function getStaticProps({ params }) {
         positions,
         pageData,
         siteSettings,
+        testimonials,
       },
     },
   };
