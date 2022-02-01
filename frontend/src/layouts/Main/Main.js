@@ -5,7 +5,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useMediaQuery } from '@material-ui/core';
 import { Topbar, Footer, Sidebar } from './components';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     height: '100%',
   },
@@ -50,6 +50,11 @@ const Main = props => {
           title: 'Our Locations',
           id: 'our-locations',
           href: '/who-we-are#our-locations',
+        },
+        {
+          title: 'Our Culture',
+          id: 'culture',
+          href: '/culture',
         },
       ],
     },

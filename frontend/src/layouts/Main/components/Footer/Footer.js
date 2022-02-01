@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -162,7 +162,7 @@ const Footer = props => {
                         </Typography>
                       </ListItem>
                       {Object.keys(pages).map((page, i) => (
-                        <div key={i}>
+                        <React.Fragment key={i}>
                           {pages[page].children &&
                           pages[page].children.map((child, i) => (
                             <ListItem disableGutters key={i} className={classes.menuGroupItem}>
@@ -188,7 +188,7 @@ const Footer = props => {
                               </Typography>
                             </ListItem>
                           )}
-                        </div>
+                        </React.Fragment>
                       ))}
                     </List>
                   </div>

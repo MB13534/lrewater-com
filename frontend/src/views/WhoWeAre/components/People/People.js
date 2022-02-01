@@ -77,6 +77,7 @@ const People = props => {
   const theme = useTheme();
 
   const [selectedPeopleType, setSelectedPeopleType] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   const [filteredPeople, setFilteredPeople] = useState(data.people);
 
@@ -88,9 +89,13 @@ const People = props => {
         newState = newState.filter(x => x.people_types.find(y => y.people_types_id === selectedPeopleType.id));
       }
 
+      if (selectedLocation) {
+        newState = newState.filter(x => x.location?.id === selectedLocation.id);
+      }
+
       return newState;
     });
-  }, [selectedPeopleType]);
+  }, [selectedPeopleType, selectedLocation]);
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
@@ -110,6 +115,7 @@ const People = props => {
       <Typography variant="h5" className={classes.formGroupLabel} gutterBottom>
         Filter By:
       </Typography>
+      <Grid container spacing={2}>
       <Grid item xs={12} sm={6} md={3}>
         <Autocomplete
           id="PeopleFilter"
@@ -130,6 +136,28 @@ const People = props => {
             />
           )}
         />
+      </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <Autocomplete
+            id="LocationsFilter"
+            options={data.locations}
+            value={selectedLocation}
+            getOptionLabel={option => option.name}
+            getOptionSelected={(option, value) => option.id === value.id}
+            onChange={(event, value) => setSelectedLocation(value)}
+            renderInput={params => (
+              <TextField
+                {...params}
+                variant="filled"
+                label="Location"
+                placeholder="Select Location"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            )}
+          />
+        </Grid>
       </Grid>
       <Grid container spacing={8} style={{ marginTop: theme.spacing(4) }}>
         {data.people.map((person, i) => {
