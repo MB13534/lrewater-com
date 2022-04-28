@@ -88,7 +88,7 @@ const ResourceList = props => {
         <Grid item xs={12} sm={6} md={3}>
           <Autocomplete
             id="PeopleFilter"
-            options={data.people}
+            options={data.people.sort((a,b) => (a.name > b.name ? 1 : -1))}
             value={selectedPeople}
             getOptionLabel={option => option.name}
             getOptionSelected={(option, value) => option.id === value.id}
@@ -109,7 +109,7 @@ const ResourceList = props => {
         <Grid item xs={12} sm={6} md={3}>
           <Autocomplete
             id="ServicesFilter"
-            options={data.serviceGroups}
+            options={data.serviceGroups.sort((a,b) => (a.name > b.name ? 1 : -1))}
             value={selectedServices}
             getOptionLabel={option => option.name}
             getOptionSelected={(option, value) => option.id === value.id}
@@ -130,7 +130,7 @@ const ResourceList = props => {
         <Grid item xs={12} sm={6} md={3}>
           <Autocomplete
             id="ExpertisesFilter"
-            options={data.expertises}
+            options={data.expertises.sort((a,b) => (a.name > b.name ? 1 : -1))}
             value={selectedExpertises}
             getOptionLabel={option => option.name}
             getOptionSelected={(option, value) => option.id === value.id}
@@ -151,7 +151,7 @@ const ResourceList = props => {
         <Grid item xs={12} sm={6} md={3}>
           <Autocomplete
             id="ProjectsFilter"
-            options={data.projects}
+            options={data.projects.sort((a,b) => (a.name > b.name ? 1 : -1))}
             value={selectedProjects}
             getOptionLabel={option => option.name}
             getOptionSelected={(option, value) => option.id === value.id}

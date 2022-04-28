@@ -101,7 +101,7 @@ const ProjectList = props => {
   const [selectedServices, setSelectedServices] = useState(null);
   const [selectedExpertises, setSelectedExpertises] = useState(null);
   const [selectedLocations, setSelectedLocations] = useState(null);
-  const [sort, setSort] = React.useState('chronological');
+  const [sort, setSort] = React.useState('alphabetical');
 
   const [filteredProjects, setFilteredProjects] = useState(data.projects);
 
@@ -125,7 +125,7 @@ const ProjectList = props => {
 
       if (selectedExpertises) {
         newState = newState.filter(
-          x => typeof x.expertises.find(y => y.expertise_id === selectedExpertises.id) !== 'undefined'
+          x => typeof x.expertises.find(y => y.expertises_id === selectedExpertises.id) !== 'undefined'
         );
       }
 
@@ -154,7 +154,7 @@ const ProjectList = props => {
         <Grid item xs={12} sm={6} md={3}>
           <Autocomplete
             id="PeopleFilter"
-            options={data.people}
+            options={data.people.sort((a,b) => (a.name > b.name ? 1 : -1))}
             value={selectedPeople}
             getOptionLabel={option => option.name}
             getOptionSelected={(option, value) => option.id === value.id}
@@ -175,7 +175,7 @@ const ProjectList = props => {
         <Grid item xs={12} sm={6} md={3}>
           <Autocomplete
             id="ServicesFilter"
-            options={data.serviceGroups}
+            options={data.serviceGroups.sort((a,b) => (a.name > b.name ? 1 : -1))}
             value={selectedServices}
             getOptionLabel={option => option.name}
             getOptionSelected={(option, value) => option.id === value.id}
@@ -196,7 +196,7 @@ const ProjectList = props => {
         <Grid item xs={12} sm={6} md={3}>
           <Autocomplete
             id="ExpertisesFilter"
-            options={data.expertises}
+            options={data.expertises.sort((a,b) => (a.name > b.name ? 1 : -1))}
             value={selectedExpertises}
             getOptionLabel={option => option.name}
             getOptionSelected={(option, value) => option.id === value.id}
