@@ -32,15 +32,17 @@ const Form = props => {
 
   return (
     <div className={clsx(classes.root, className)} {...rest}>
-      <form name="contact" data-netlify="true" className={classes.form} method="post">
+      <form name="contact" data-netlify="true" className={classes.form} method="POST">
         <input type="hidden" name="form-name" value="contact" />
         <Box pb={4}>
-          <TextField label="Full Name" variant={'outlined'} fullWidth className={classes.textField} />
-          <TextField label="E-Mail" variant={'outlined'} fullWidth className={classes.textField} />
-          <TextField label="Message" variant={'outlined'} fullWidth multiline rows={4} className={classes.textField} />
+          <TextField label="Full Name" name="fullname" variant={'outlined'} fullWidth className={classes.textField} />
+          <TextField label="E-Mail" name="email" variant={'outlined'} fullWidth className={classes.textField} />
+          <TextField label="Message" name="message" variant={'outlined'} fullWidth multiline rows={4} className={classes.textField} />
         </Box>
         <Box ml={8}>
-          <Button variant={'outlined'} size={'large'} color={'primary'} href={'/contact'} type="submit">
+          <Button variant={'outlined'} size={'large'} color={'primary'}
+                  // href={'/contact'}
+                  type="submit">
             Send Message
           </Button>
         </Box>
