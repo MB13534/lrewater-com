@@ -16,13 +16,13 @@ import 'assets/scss/index.scss';
 import 'swiper/css/swiper.min.css';
 import 'aos/dist/aos.css';
 
-if (typeof window === 'undefined') {
-  global.window = {};
-}
-
-if (typeof document === 'undefined') {
-  global.document = {};
-}
+// if (typeof window === 'undefined') {
+//   global.window = {};
+// }
+//
+// if (typeof document === 'undefined') {
+//   global.document = {};
+// }
 
 export default function App({ Component, pageProps }) {
   React.useEffect(() => {
@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }) {
     <React.Fragment>
       <Head>
         <meta charSet="utf-8" />
-        <link rel="shortcut icon" href="favicon.ico" />
+        {/*<link rel="shortcut icon" href="/favicon.ico" />*/}
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
