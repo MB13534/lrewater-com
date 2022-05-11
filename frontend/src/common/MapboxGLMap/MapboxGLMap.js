@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {makeStyles} from "@material-ui/core/styles"
 import mapboxgl from 'mapbox-gl';
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const MapboxGLMap = (props) => {
-  const { address, ...rest } = props;
+  const { address, longitude, latitude, ...rest } = props;
   const classes = useStyles()
   const mapContainer = useRef(null);
   const styleUrl = 'mapbox://styles/lrewater/cjzkfacup5tc21cpn3ehr6f8e';
@@ -33,7 +33,7 @@ const MapboxGLMap = (props) => {
       const map = new mapboxgl.Map({
         container: mapContainer.current,
         style: styleUrl,
-        center: {lng: results.features[0].center[0], lat: results.features[0].center[1]},
+        center: {lng: longitude !== 0 ? longitude : results.features[0].center[0], lat: latitude !== 0 ? latitude : results.features[0].center[1]},
         zoom: 7.75,
         scrollZoom: false,
       });
@@ -41,7 +41,7 @@ const MapboxGLMap = (props) => {
       map.addControl(new mapboxgl.NavigationControl());
 
       const marker = new mapboxgl.Marker()
-        .setLngLat([results.features[0].center[0], results.features[0].center[1]])
+        .setLngLat([longitude !== 0 ? longitude : results.features[0].center[0], latitude !== 0 ? latitude : results.features[0].center[1]])
         .addTo(map);
     }
 
