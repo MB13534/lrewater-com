@@ -77,7 +77,18 @@ const Main = props => {
     resources: {
       title: 'Resources',
       id: 'resources',
-      href: '/resources',
+      children: [
+        {
+          title: 'Resources & Publications',
+          id: 'resources',
+          href: '/resources',
+        },
+        {
+          title: 'Historical Annual Runoff',
+          id: 'historicalannualrunoff',
+          href: '/colorado-water-supply-outlook',
+        },
+      ],
     },
     careers: {
       title: 'Careers',
@@ -128,8 +139,8 @@ const Main = props => {
       twitter_url: '',
       linkedin_url: '',
       tagline: 'Connecting Water to Life',
-      legal: '© 2015-2021. Leonard Rice Engineers, Inc.'
-    }
+      legal: '© 2015-2021. Leonard Rice Engineers, Inc.',
+    };
   }
   return (
     <div
@@ -138,13 +149,8 @@ const Main = props => {
       })}
     >
       <Topbar onSidebarOpen={handleSidebarOpen} pages={pages} />
-      <Sidebar
-        onClose={handleSidebarClose}
-        open={open}
-        variant="temporary"
-        pages={pages}
-      />
-      <main style={{marginTop:'120px'}}>{children}</main>
+      <Sidebar onClose={handleSidebarClose} open={open} variant="temporary" pages={pages} />
+      <main style={{ marginTop: '120px' }}>{children}</main>
       <Footer siteSettings={siteSettings} pages={pages} />
     </div>
   );

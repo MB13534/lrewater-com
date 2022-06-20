@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Section } from 'components/organisms';
 import PageHero from '../../common/PageHero';
-import Construction from './components/Construction';
+import HistoricalAnnualRunoff from './components/HistoricalAnnualRunoff';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -13,13 +13,12 @@ const useStyles = makeStyles(theme => ({
     },
   },
   pageHero: {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 const ColoradoWaterSupplyOutlook = ({ data }) => {
   const classes = useStyles();
-
 
   return (
     <div className={classes.root}>
@@ -27,7 +26,7 @@ const ColoradoWaterSupplyOutlook = ({ data }) => {
         <PageHero data={data.pageData} className={classes.pageHero} />
       </Section>
       <Section>
-        <Construction data={data.pageData} />
+        <HistoricalAnnualRunoff data={data.pageData} />
       </Section>
     </div>
   );
