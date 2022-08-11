@@ -35,23 +35,23 @@ const Mission = props => {
       />
       {data.pageData.mission_image && (
         <Box mb={4}>
-          <Image src={data.pageData.mission_image.data.full_url} width={'100%'} height="auto" alt={data.pageData.mission_image.title} />
+          <Image
+            src={data.pageData.mission_image.data.full_url}
+            width={'100%'}
+            height="auto"
+            alt={data.pageData.mission_image.title}
+          />
         </Box>
       )}
       <Grid container spacing={8}>
         <Grid item xs={12}>
-          <Typography
-            variant="body2"
-          >
-          </Typography>
-          <div style={{marginBottom: theme.spacing(6)}} dangerouslySetInnerHTML={{ __html: data.pageData.mission_body }} />
-          <Button
-            variant={'outlined'}
-            size={'large'}
-            color={'primary'}
-            href={'/culture'}
-          >
-            Our Culture
+          <Typography variant="body2"></Typography>
+          <div
+            style={{ marginBottom: theme.spacing(6) }}
+            dangerouslySetInnerHTML={{ __html: data.pageData.mission_body }}
+          />
+          <Button variant={'outlined'} size={'large'} color={'primary'} href={'/culture'}>
+            Culture
           </Button>
         </Grid>
       </Grid>

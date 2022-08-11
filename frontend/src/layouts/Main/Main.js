@@ -32,27 +32,27 @@ const Main = props => {
       id: 'whoweare',
       children: [
         {
-          title: 'Our Mission',
-          id: 'our-mission',
-          href: '/who-we-are#our-mission',
+          title: 'Mission',
+          id: 'mission',
+          href: '/who-we-are#mission',
         },
         {
-          title: 'Our Values',
-          id: 'our-values',
-          href: '/who-we-are#our-values',
+          title: 'Values',
+          id: 'values',
+          href: '/who-we-are#values',
         },
         {
-          title: 'Our People',
-          id: 'our-people',
-          href: '/who-we-are#our-people',
+          title: 'People',
+          id: 'people',
+          href: '/who-we-are#people',
         },
         {
-          title: 'Our Locations',
-          id: 'our-locations',
-          href: '/who-we-are#our-locations',
+          title: 'Locations',
+          id: 'locations',
+          href: '/who-we-are#locations',
         },
         {
-          title: 'Our Culture',
+          title: 'Culture',
           id: 'culture',
           href: '/culture',
         },
@@ -63,12 +63,12 @@ const Main = props => {
       id: 'whatwedo',
       children: [
         {
-          title: 'Our Services',
+          title: 'Services',
           id: 'services',
           href: '/services',
         },
         {
-          title: 'Our Projects',
+          title: 'Projects',
           id: 'projects',
           href: '/projects',
         },

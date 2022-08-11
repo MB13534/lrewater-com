@@ -17,8 +17,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   pageHero: {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 const WhoWeAre = ({ data }) => {
@@ -42,28 +42,31 @@ const WhoWeAre = ({ data }) => {
       {/*<SectionAlternate className={classes.sectionBreadcrumb}>
         <Breadcrumb data={breadcrumb} />
       </SectionAlternate>*/}
-      <Section disablePadding style={{display: 'inline'}}>
+      <Section disablePadding style={{ display: 'inline' }}>
         <PageHero data={data.pageData} className={classes.pageHero} />
-        <a name="our-mission" style={{
-          display: 'block',
-          position: 'relative',
-          top: '-100px',
-          visibility: 'hidden',
-        }}/>
+        <a
+          name="mission"
+          style={{
+            display: 'block',
+            position: 'relative',
+            top: '-100px',
+            visibility: 'hidden',
+          }}
+        />
       </Section>
       <Section>
         <Mission data={data} />
-        <a name="our-values"/>
+        <a name="values" />
       </Section>
 
       <SectionAlternate>
         <Values data={data} />
-        <a name="our-people"/>
+        <a name="people" />
       </SectionAlternate>
 
       <Section>
         <People data={data} />
-        <a name="our-locations"/>
+        <a name="locations" />
       </Section>
 
       <SectionAlternate dark>

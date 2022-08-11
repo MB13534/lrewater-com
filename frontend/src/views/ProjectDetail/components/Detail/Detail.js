@@ -88,7 +88,7 @@ const Detail = props => {
             <span>
               {project.people.map((person, i) => (
                 <React.Fragment key={i}>
-                  <Link href="/who-we-are#our-people">{person.people_id?.name}</Link>
+                  <Link href="/who-we-are#people">{person.people_id?.name}</Link>
                   {i < project.people.length - 1 && ', '}
                 </React.Fragment>
               ))}
@@ -99,9 +99,8 @@ const Detail = props => {
       <Box pb={2} pt={2}>
         <Image src={project.image?.data.full_url} alt={project.name} />
       </Box>
-      <Typography variant="body2" className={classes.body} gutterBottom>
-      </Typography>
-      <div className={classes.body}  dangerouslySetInnerHTML={{ __html: project.body }} />
+      <Typography variant="body2" className={classes.body} gutterBottom></Typography>
+      <div className={classes.body} dangerouslySetInnerHTML={{ __html: project.body }} />
       {project.project_date && (
         <Typography variant="caption" gutterBottom>
           Project Date: {moment(project.project_date).format('MMMM D, YYYY')}

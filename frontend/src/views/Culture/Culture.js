@@ -16,8 +16,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   pageHero: {
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 const Culture = ({ data }) => {
@@ -35,8 +35,8 @@ const Culture = ({ data }) => {
       isActive: false,
     },
     {
-      href: '/our-culture',
-      title: 'Our Culture',
+      href: '/culture',
+      title: 'Culture',
       isActive: true,
     },
   ];
@@ -46,13 +46,13 @@ const Culture = ({ data }) => {
       <SectionAlternate className={classes.sectionBreadcrumb}>
         <Breadcrumb data={breadcrumb} />
       </SectionAlternate>
-      <Section disablePadding style={{display: 'inline'}}>
+      <Section disablePadding style={{ display: 'inline' }}>
         <PageHero data={data.pageData} className={classes.pageHero} />
       </Section>
       <Section>
         <Body data={data} />
       </Section>
-      <Section style={{paddingTop: 0}}>
+      <Section style={{ paddingTop: 0 }}>
         <Gallery data={data} />
       </Section>
       <Section>
